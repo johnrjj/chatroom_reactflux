@@ -1,11 +1,22 @@
 module.exports = {
   entry: {
     main: [
-      './script1.js',
-      './script2.js'
+      './src/main.jsx'
     ]
   },
   output: {
-    filename: './public/[name]'
+    filename: './public/[name].js'
+  },
+  module: {
+    loaders: [
+      {
+          test: /\.jsx?$/,
+          loader: 'babel',
+          exclude: /node_modules/,
+          query: {
+              presets: ['es2015']
+          }
+      }
+    ]
   }
 }
