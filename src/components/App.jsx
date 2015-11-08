@@ -1,28 +1,50 @@
 import React from 'react';
+import MessageList from './MessageList.jsx'
+import ChannelList from './ChannelList.jsx'
+import MessageBox from './MessageBox.jsx'
+import mui from 'material-ui';
+
+const Colors = mui.Styles.Colors;
+const AppBar = mui.AppBar;
+const ThemeManager = require('material-ui/lib/styles/theme-manager');
+const lightTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
+
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      messages: [
-        'hi13456',
-        'hello2'
-      ]
-    };
-  }
+  };
 
-  render() {
-    var messageNodes = this.state.messages.map((message) => {
-      return (
-        <li key={message}>{message}</li>
-      );
-    });
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  };
 
-    // render should only return one element, hence wrapping messagenodes
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(lightTheme),
+    }
+  };
+
+  render(){
     return (
-      <div>{messageNodes}</div>
+      <div>
+        <AppBar title="Chat App" />
+        <div style={{
+            display: 'flex',
+            flexFlow: 'row wrap',
+            maxWidth: 1200,
+            width: '100%',
+            margin: '30px auto 30px'
+          }}>
+          <ChannelList />
+          <MessageList />
+
+        </div>
+        <MessageBox />
+      </div>
     )
-  }
+
+  };
 }
 
 export default App;
