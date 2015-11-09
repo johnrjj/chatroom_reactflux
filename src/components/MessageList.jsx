@@ -17,7 +17,6 @@ class MessageList extends React.Component {
 
     this.firebaseRef = new Firebase('https://reactchatswag.firebaseio.com/messages');
     this.firebaseRef.once('value', (DataSnapshot) => {
-
       var messageVal = DataSnapshot.val();
       var messages = _(messageVal)
         .keys() //array of all keys in obj
