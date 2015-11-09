@@ -28,12 +28,11 @@ class MessageBox extends React.Component {
       this.firebaseRef.push({
         message: this.state.message
       });
-      console.log('pushed message to firebase');
 
       this.setState({
         message: ''
       });
-      console.log('Sent a message', event.target.value);
+      console.log('Pushed message to firebase:', event.target.value);
     }
   }
 
@@ -44,6 +43,7 @@ class MessageBox extends React.Component {
         margin: '30px auto',
         padding: 30
       }}>
+
       //note with es6, we have to bind the handler to the react component scope
         <textarea
           value={this.state.message}

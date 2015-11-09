@@ -12,29 +12,33 @@ class MessageList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      messages: []
+      messages: {}
     };
 
     this.firebaseRef = new Firebase('https://reactchatswag.firebaseio.com/messages');
-    this.firebaseRef.once('value', (DataSnapshot) => {
-      var messageVal = DataSnapshot.val();
-      var messages = _(messageVal)
-        .keys() //array of all keys in obj
-        .map((messageKey) => {
-          var cloned = _.clone(messageVal[messageKey]);
-          cloned.key = messageKey; // Add a key to make react happy
-          return cloned;
-        })
-        .value(); // run da chain
-      console.log(messages);
-      this.setState({
-        messages: messages
-      });
+    // firebase events: child_added, child_removed...
+    this.firebaseRef.on('child_added', (message) => {
+      // already have message
+      if(this.state.messages[message.key()]) {
+        return;
+      }
+      // reminder to self: let is block scope, var is function scope
+      let messageVal = message.val();
+      messageVal.key = message.key();
+      this.state.messages[messageVal.key] = messageVal;
+      this.setState({messages: this.state.messages});
+    });
+
+    this.firebaseRef.on('child_removed', (message) => {
+      console.log('deleting message:', message.val());
+      let key = message.key();
+      delete this.state.messages[key];
+      this.setState({messages: this.state.messages});
     });
   }
 
   render() {
-    var messageNodes = this.state.messages.map((message) => {
+    var messageNodes = _.values(this.state.messages).map((message) => {
       return (
         <Message message={message.message}  key={message.key}/>
       );
