@@ -6,7 +6,6 @@ var {ListItem} = mui;
 class Channel extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {

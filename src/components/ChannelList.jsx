@@ -6,7 +6,6 @@ import mui from 'material-ui';
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 var {Card, List} = mui;
 
-
 class ChannelList extends React.Component {
   constructor(props){
     super(props);
