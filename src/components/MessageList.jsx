@@ -8,7 +8,6 @@ import _ from 'lodash';
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 var {Card, List} = mui;
 
-
 class MessageList extends React.Component {
   constructor(props){
     super(props);

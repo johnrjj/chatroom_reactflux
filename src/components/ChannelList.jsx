@@ -25,7 +25,6 @@ class ChannelList extends React.Component {
       );
     });
 
-    // render should only return one element, hence wrapping messagenodes
     return (
       <Card style={{
           flexGrow: 1

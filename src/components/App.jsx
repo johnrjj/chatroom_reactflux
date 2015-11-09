@@ -7,8 +7,7 @@ import mui from 'material-ui';
 const Colors = mui.Styles.Colors;
 const AppBar = mui.AppBar;
 const ThemeManager = require('material-ui/lib/styles/theme-manager');
-const lightTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
-
+const LightTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
 
 class App extends React.Component {
   constructor() {
@@ -21,7 +20,7 @@ class App extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(lightTheme),
+      muiTheme: ThemeManager.getMuiTheme(LightTheme),
     }
   };
 
@@ -38,12 +37,10 @@ class App extends React.Component {
           }}>
           <ChannelList />
           <MessageList />
-
         </div>
         <MessageBox />
       </div>
     )
-
   };
 }
 
